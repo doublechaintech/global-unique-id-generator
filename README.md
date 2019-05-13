@@ -1,1 +1,1 @@
-# global-unique-id-generator
+# id-generator
