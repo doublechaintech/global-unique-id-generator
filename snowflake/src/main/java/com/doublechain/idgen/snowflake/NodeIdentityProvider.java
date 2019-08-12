@@ -6,5 +6,7 @@ public interface NodeIdentityProvider {
 
     void start() throws Exception;
 
-    void stop();
+    boolean isStarted();
+
+    void stop() throws Exception;
 }

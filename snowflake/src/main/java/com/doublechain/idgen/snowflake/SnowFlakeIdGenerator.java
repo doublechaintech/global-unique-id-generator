@@ -12,26 +12,22 @@ package com.doublechain.idgen.snowflake;
  */
 public class SnowFlakeIdGenerator {
 
+    private static long workerIdBits = 5L;
+    static long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    private static long dataCenterIdBits = 5L;
+    static long maxDataCenterId = -1L ^ (-1L << dataCenterIdBits);
+    private final NodeIdentityProvider nodeIdentityProvider;
     private long workerId;
     private long dataCenterId;
     private long sequence = 0L;
-
     // the start timestamp in milliseconds (2018-01-01 00:00:00)
     private long startEpoch = 1514736000000L;
-
-    private static long workerIdBits = 5L;
-    private static long dataCenterIdBits = 5L;
-    static long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    static long maxDataCenterId = -1L ^ (-1L << dataCenterIdBits);
     private long sequenceBits = 12L;
-
     private long workerIdShift = sequenceBits;
     private long dataCenterIdShift = sequenceBits + workerIdBits;
     private long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
     private long sequenceMask = -1L ^ (-1L << sequenceBits);
-
     private long lastTimestamp = -1L;
-    private NodeIdentityProvider nodeIdentityProvider;
 
     public SnowFlakeIdGenerator(NodeIdentityProvider nodeIdentityProvider) {
         this.nodeIdentityProvider = nodeIdentityProvider;
@@ -64,6 +60,9 @@ public class SnowFlakeIdGenerator {
     }
 
     public long nextId() {
+        if (!nodeIdentityProvider.isStarted()) {
+            throw new IllegalStateException("Start id-generator is necessary before generating ids");
+        }
         long timestamp = System.currentTimeMillis();
 
         if (timestamp < lastTimestamp) {

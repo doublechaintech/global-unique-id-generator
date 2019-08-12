@@ -1,0 +1,9 @@
+doublechain:
+  idgen:
+    snowflake:
+      data-center: 1
+      group: test
+      zookeeper:
+        namespace: my-snowflake
+        servers: 10.0.0.32:2181
+        session-timeout-ms: 30000

@@ -9,13 +9,31 @@ public class SnowFlakeIdGeneratorTest {
 
     @Test
     public void testNextId() throws Exception {
-        NodeIdentityProvider provider = new ZookeeperNodeIdentityProvider("xstardev.jios.org:20181,xstardev.jios.org:21181,xstardev.jios.org:22181", "test", 1);
-        SnowFlakeIdGenerator idGenerator = new SnowFlakeIdGenerator(provider);
-        idGenerator.start();
-        for (int i = 0; i < 100; i++) {
-            long l = idGenerator.nextId();
-            System.out.println(l);
+        Thread thread1 = new Thread(new Task());
+        thread1.start();
+        Thread thread2 = new Thread(new Task());
+        thread2.start();
+        thread1.join();
+        thread2.join();
+    }
+
+    class Task implements Runnable {
+
+        @Override
+        public void run() {
+            NodeIdentityProvider provider = ZookeeperNodeIdentityProvider.builder(1, "test", "10.0.0.32:2181")
+                    .namespace("my-snowflake").build();
+            SnowFlakeIdGenerator idGenerator = new SnowFlakeIdGenerator(provider);
+            try {
+                idGenerator.start();
+                for (int i = 0; i < 10; i++) {
+                    long id = idGenerator.nextId();
+                    System.out.println(Thread.currentThread().getName() + "====" + id);
+                }
+                idGenerator.stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        idGenerator.stop();
     }
 }
