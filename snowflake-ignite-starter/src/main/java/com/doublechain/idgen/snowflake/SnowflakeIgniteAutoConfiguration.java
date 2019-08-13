@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 @EnableConfigurationProperties(SnowflakeZookeeperConfigure.class)
-@ConditionalOnClass({ZookeeperNodeIdentityProvider.class, SnowFlakeIdGenerator.class})
-public class SnowflakeZookeeperAutoConfiguration {
+@ConditionalOnClass({IgniteNodeIdentityProvider.class, SnowFlakeIdGenerator.class})
+public class SnowflakeIgniteAutoConfiguration {
 
     @Autowired
     private SnowflakeZookeeperConfigure configure;

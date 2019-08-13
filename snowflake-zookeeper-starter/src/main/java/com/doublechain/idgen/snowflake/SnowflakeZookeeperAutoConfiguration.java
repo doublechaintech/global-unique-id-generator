@@ -23,7 +23,7 @@ public class SnowflakeZookeeperAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public NodeIdentityProvider nodeIdentityProvider() {
-        ZookeeperConfigure zookeeper = configure.getZookeeper();
+        SnowflakeZookeeperConfigure.ZookeeperConfigure zookeeper = configure.getZookeeper();
         String servers = zookeeper.getServers();
         int sessionTimeoutMs = zookeeper.getSessionTimeoutMs();
         String namespace = zookeeper.getNamespace();

@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = "doublechain.idgen.snowflake")
-public class SnowflakeZookeeperConfigure {
+public class SnowflakeIgniteConfigure {
 
     private ZookeeperConfigure zookeeper;
 

@@ -14,4 +14,14 @@ public class SnowflakeZookeeperConfigure {
     private int dataCenter;
 
     private String startTimestamp;
+
+    @Data
+    public static class ZookeeperConfigure {
+
+        private String servers;
+
+        private int sessionTimeoutMs;
+
+        private String namespace;
+    }
 }

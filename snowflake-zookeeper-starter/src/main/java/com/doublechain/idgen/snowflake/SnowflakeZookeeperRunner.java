@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
-public class SnowflakeAppRunner implements ApplicationRunner, DisposableBean {
+public class SnowflakeZookeeperRunner implements ApplicationRunner, DisposableBean {
 
     @Autowired
     private SnowFlakeIdGenerator idGenerator;
