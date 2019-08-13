@@ -15,6 +15,4 @@ public class NodeIdentity {
 
     private String group;
 
-    private long startEpochMs;
-
 }

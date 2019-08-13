@@ -73,22 +73,20 @@ public class ZookeeperNodeIdentityProvider implements NodeIdentityProvider {
 
     @Override
     public NodeIdentity provide() throws Exception {
-        for (int i = 1; i <= SnowFlakeIdGenerator.maxWorkerId; i++) {
+        for (int i = 1; true; i++) {
             String workerPath = String.format("/%s/dc_%d/worker_%d", group, dataCenter, i);
             try {
                 client.create().withMode(CreateMode.EPHEMERAL).forPath(workerPath);
                 final String groupSpace = String.format("/%s", group);
                 final Stat groupStat = new Stat();
                 client.getData().storingStatIn(groupStat).forPath(groupSpace);
-                final long ctime = groupStat.getCtime();
-                final NodeIdentity nodeIdentity = new NodeIdentity(i, dataCenter, group, ctime);
+                final NodeIdentity nodeIdentity = new NodeIdentity(i, dataCenter, group);
                 log.info("Got node identity from zookeeper, the identity is {}", nodeIdentity);
                 return nodeIdentity;
             } catch (KeeperException.NodeExistsException e) {
                 // keep empty
             }
         }
-        throw new IllegalStateException(String.format("Snowflake only support %d workers in a data center", SnowFlakeIdGenerator.maxWorkerId));
     }
 
     @Override

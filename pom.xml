@@ -12,14 +12,16 @@
         <module>client</module>
         <module>server</module>
         <module>starter</module>
-        <module>snowflake</module>
         <module>id-space-client</module>
+        <module>snowflake</module>
         <module>snowflake-zookeeper-starter</module>
+        <module>snowflake-ignite-starter</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <ignite.version>2.7.5</ignite.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +77,16 @@
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>3.4.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-core</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-slf4j</artifactId>
+                <version>${ignite.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
