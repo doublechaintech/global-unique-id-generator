@@ -38,6 +38,13 @@
       "defaultValue": 0
     },
     {
+      "name": "doublechain.idgen.snowflake.ignite.discovery-type",
+      "type": "java.lang.String",
+      "description": "The node discovery type in cluster",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure",
+      "defaultValue": "multicast"
+    },
+    {
       "name": "doublechain.idgen.snowflake.ignite.multicast.group-ip",
       "type": "java.lang.String",
       "description": "The IP address of multicast group",
@@ -72,5 +79,14 @@
       "defaultValue": 100
     }
   ],
-  "hints": []
+  "hints": [
+    {
+      "name": "doublechain.idgen.snowflake.ignite.discovery-type",
+      "values": [
+        {
+          "value": "multicast"
+        }
+      ]
+    }
+  ]
 }

@@ -22,6 +22,8 @@ public class SnowflakeIgniteConfigure {
 
 //        private ZookeeperConfigure zookeeper;
 
+        private String discoveryType;
+
         private int joinTimeout;
 
         private String localAddress;

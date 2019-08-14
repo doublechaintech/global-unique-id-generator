@@ -4,3 +4,10 @@ spring:
     username: root
     password: 123abcABC
     driver-class-name: com.mysql.cj.jdbc.Driver
+doublechain:
+  idgen:
+    snowflake:
+      data-center: 1
+      group: test
+      ignite:
+        discovery-type: multicast

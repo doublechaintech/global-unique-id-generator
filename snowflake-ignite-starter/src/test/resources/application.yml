@@ -4,3 +4,9 @@ doublechain:
       data-center: 1
       group: test
       ignite:
+        multicast:
+          group-ip: 228.1.2.4
+          multicast-port: 47401
+        discovery-type: multicast
+server:
+  port: 18080

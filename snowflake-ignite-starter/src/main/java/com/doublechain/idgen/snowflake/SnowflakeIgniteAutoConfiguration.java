@@ -25,21 +25,23 @@ public class SnowflakeIgniteAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(value = {"doublechain.idgen.snowflake.ignite.multicast"})
+    @ConditionalOnProperty(value = "doublechain.idgen.snowflake.ignite.discovery-type", havingValue = "multicast")
     public NodeIdentityProvider nodeIdentityProviderUsingMulticast() {
         SnowflakeIgniteConfigure.IgniteConfigure ignite = configure.getIgnite();
         SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure multicast = ignite.getMulticast();
         TcpDiscoverySpi discoverySpi = new TcpDiscoverySpi();
-        discoverySpi.setLocalPort(multicast.getLocalPort());
-        discoverySpi.setLocalPortRange(multicast.getLocalPortRange());
         TcpDiscoveryMulticastIpFinder ipFinder = new TcpDiscoveryMulticastIpFinder();
-        if (!StringUtils.isEmpty(multicast.getGroupIp())) {
-            ipFinder.setMulticastGroup(multicast.getGroupIp());
+        if (multicast != null) {
+            discoverySpi.setLocalPort(multicast.getLocalPort());
+            discoverySpi.setLocalPortRange(multicast.getLocalPortRange());
+            if (!StringUtils.isEmpty(multicast.getGroupIp())) {
+                ipFinder.setMulticastGroup(multicast.getGroupIp());
+            }
+            if (!StringUtils.isEmpty(multicast.getLocalAddress())) {
+                ipFinder.setLocalAddress(multicast.getLocalAddress());
+            }
+            ipFinder.setMulticastPort(multicast.getMulticastPort());
         }
-        if (!StringUtils.isEmpty(multicast.getLocalAddress())) {
-            ipFinder.setLocalAddress(multicast.getLocalAddress());
-        }
-        ipFinder.setMulticastPort(multicast.getMulticastPort());
         discoverySpi.setJoinTimeout(ignite.getJoinTimeout());
         if (!StringUtils.isEmpty(ignite.getLocalAddress())) {
             discoverySpi.setLocalAddress(ignite.getLocalAddress());

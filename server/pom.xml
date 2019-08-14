@@ -21,6 +21,11 @@
             <artifactId>id-generator-server-starter</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.doublechain</groupId>
+            <artifactId>snowflake-ignite-starter</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>io.springfox</groupId>-->
             <!--<artifactId>springfox-swagger2</artifactId>-->
