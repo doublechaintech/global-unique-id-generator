@@ -48,8 +48,8 @@ public class SnowflakeZookeeperAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public SnowflakeAppRunner runner() {
-        return new SnowflakeAppRunner();
+    public SnowflakeZookeeperRunner runner() {
+        return new SnowflakeZookeeperRunner();
     }
 
 }

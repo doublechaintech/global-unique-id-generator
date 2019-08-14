@@ -1,8 +1,11 @@
 package com.doublechain.idgen.snowflake;
 
+import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
+import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,27 +16,51 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @Configuration
-@EnableConfigurationProperties(SnowflakeZookeeperConfigure.class)
+@EnableConfigurationProperties(SnowflakeIgniteConfigure.class)
 @ConditionalOnClass({IgniteNodeIdentityProvider.class, SnowFlakeIdGenerator.class})
 public class SnowflakeIgniteAutoConfiguration {
 
     @Autowired
-    private SnowflakeZookeeperConfigure configure;
+    private SnowflakeIgniteConfigure configure;
 
     @Bean
     @ConditionalOnMissingBean
-    public NodeIdentityProvider nodeIdentityProvider() {
-        ZookeeperConfigure zookeeper = configure.getZookeeper();
-        String servers = zookeeper.getServers();
-        int sessionTimeoutMs = zookeeper.getSessionTimeoutMs();
-        String namespace = zookeeper.getNamespace();
-        int dataCenter = configure.getDataCenter();
-        String group = configure.getGroup();
-        return ZookeeperNodeIdentityProvider.builder(dataCenter, group, servers)
-                .namespace(namespace)
-                .sessionTimeoutMs(sessionTimeoutMs)
-                .build();
+    @ConditionalOnProperty(value = {"doublechain.idgen.snowflake.ignite.multicast"})
+    public NodeIdentityProvider nodeIdentityProviderUsingMulticast() {
+        SnowflakeIgniteConfigure.IgniteConfigure ignite = configure.getIgnite();
+        SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure multicast = ignite.getMulticast();
+        TcpDiscoverySpi discoverySpi = new TcpDiscoverySpi();
+        discoverySpi.setLocalPort(multicast.getLocalPort());
+        discoverySpi.setLocalPortRange(multicast.getLocalPortRange());
+        TcpDiscoveryMulticastIpFinder ipFinder = new TcpDiscoveryMulticastIpFinder();
+        if (!StringUtils.isEmpty(multicast.getGroupIp())) {
+            ipFinder.setMulticastGroup(multicast.getGroupIp());
+        }
+        if (!StringUtils.isEmpty(multicast.getLocalAddress())) {
+            ipFinder.setLocalAddress(multicast.getLocalAddress());
+        }
+        ipFinder.setMulticastPort(multicast.getMulticastPort());
+        discoverySpi.setJoinTimeout(ignite.getJoinTimeout());
+        if (!StringUtils.isEmpty(ignite.getLocalAddress())) {
+            discoverySpi.setLocalAddress(ignite.getLocalAddress());
+        }
+        discoverySpi.setIpFinder(ipFinder);
+        return new IgniteNodeIdentityProvider(configure.getGroup(), configure.getDataCenter(), discoverySpi);
     }
+
+//    @Bean
+//    @ConditionalOnMissingBean
+//    @ConditionalOnProperty(value = {"doublechain.idgen.snowflake.ignite.zookeeper"})
+//    public NodeIdentityProvider nodeIdentityProviderUsingZookeeper() {
+//        SnowflakeIgniteConfigure.IgniteConfigure ignite = configure.getIgnite();
+//        SnowflakeIgniteConfigure.IgniteConfigure.ZookeeperConfigure zookeeper = ignite.getZookeeper();
+//        ZookeeperDiscoverySpi discoverySpi = new ZookeeperDiscoverySpi();
+//        discoverySpi.setZkConnectionString(zookeeper.getServers());
+//        discoverySpi.setJoinTimeout(ignite.getJoinTimeout());
+//        discoverySpi.setZkRootPath(zookeeper.getRootPath());
+//        discoverySpi.setSessionTimeout(zookeeper.getSessionTimeoutMs());
+//        return new IgniteNodeIdentityProvider(configure.getGroup(), configure.getDataCenter(), discoverySpi);
+//    }
 
     @Bean
     @ConditionalOnMissingBean
@@ -48,8 +75,8 @@ public class SnowflakeIgniteAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public SnowflakeAppRunner runner() {
-        return new SnowflakeAppRunner();
+    public SnowflakeIgniteRunner runner() {
+        return new SnowflakeIgniteRunner();
     }
 
 }

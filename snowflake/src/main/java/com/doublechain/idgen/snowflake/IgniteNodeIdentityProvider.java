@@ -27,6 +27,7 @@ public class IgniteNodeIdentityProvider implements NodeIdentityProvider {
         this.discoverySpi = discoverySpi;
     }
 
+
     @Override
     public NodeIdentity provide() throws Exception {
         String name = "NODE_IDENTITY:" + group + ":" + dataCenter;
@@ -43,6 +44,9 @@ public class IgniteNodeIdentityProvider implements NodeIdentityProvider {
 
     @Override
     public void start() throws Exception {
+        if (isStarted()) {
+            return;
+        }
         IgniteConfiguration cfg = new IgniteConfiguration();
         cfg.setDiscoverySpi(discoverySpi);
         ignite = Ignition.start(cfg);

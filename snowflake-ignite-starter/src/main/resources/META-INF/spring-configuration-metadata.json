@@ -1,0 +1,76 @@
+{
+  "groups": [
+    {
+      "name": "doublechain.idgen.snowflake",
+      "type": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite",
+      "type": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast",
+      "type": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure"
+    }
+  ],
+  "properties": [
+    {
+      "name": "doublechain.idgen.snowflake.data-center",
+      "type": "java.lang.Integer",
+      "description": "Specify the data center id which is the snowflake used to generate id",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure",
+      "defaultValue": 1
+    },
+    {
+      "name": "doublechain.idgen.snowflake.group",
+      "type": "java.lang.String",
+      "description": "Group is used to separate with different id center group, sometimes it can be the project name",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.join-timeout",
+      "type": "java.lang.Integer",
+      "description": "The timeout ms which the node join the cluster. Join timeout 0 means wait forever",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure",
+      "defaultValue": 0
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast.group-ip",
+      "type": "java.lang.String",
+      "description": "The IP address of multicast group",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure",
+      "defaultValue": "228.1.2.4"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast.multicast-port",
+      "type": "java.lang.Integer",
+      "description": "The port number which multicast messages are sent to.",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure",
+      "defaultValue": 47400
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast.local-address",
+      "type": "java.lang.String",
+      "description": "The local host IP address that discovery SPI uses. If not provided, by default a first found non-loopback address will be used. If there is no non-loopback address available, then InetAddress.getLocalHost() will be used.",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast.local-port",
+      "type": "java.lang.Integer",
+      "description": "The local port to listen to",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure",
+      "defaultValue": 47500
+    },
+    {
+      "name": "doublechain.idgen.snowflake.ignite.multicast.local-port-range",
+      "type": "java.lang.Integer",
+      "description": "Range for local ports. Local node will try to bind on first available port starting from local-port up until (local-port + local-port-range). If port range value is 0, then application will try bind only to the local-port and fail if binding to this port did not succeed.",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure.IgniteConfigure.MulticastConfigure",
+      "defaultValue": 100
+    }
+  ],
+  "hints": []
+}

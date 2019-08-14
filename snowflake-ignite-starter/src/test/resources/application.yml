@@ -1,0 +1,6 @@
+doublechain:
+  idgen:
+    snowflake:
+      data-center: 1
+      group: test
+      ignite:

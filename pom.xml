@@ -89,6 +89,11 @@
                 <version>${ignite.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-zookeeper</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>

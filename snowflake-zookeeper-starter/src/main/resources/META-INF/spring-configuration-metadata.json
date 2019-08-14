@@ -7,8 +7,8 @@
     },
     {
       "name": "doublechain.idgen.snowflake.zookeeper",
-      "type": "com.doublechain.idgen.snowflake.ZookeeperConfigure",
-      "sourceType": "com.doublechain.idgen.snowflake.ZookeeperConfigure"
+      "type": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure.ZookeeperConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure.ZookeeperConfigure"
     }
   ],
   "properties": [
@@ -29,20 +29,20 @@
       "name": "doublechain.idgen.snowflake.zookeeper.servers",
       "type": "java.lang.String",
       "description": "Zookeeper cluster connection servers, comma separated",
-      "sourceType": "com.doublechain.idgen.snowflake.ZookeeperConfigure"
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure.ZookeeperConfigure"
     },
     {
       "name": "doublechain.idgen.snowflake.zookeeper.session-timeout-ms",
       "type": "java.lang.Integer",
       "description": "Timeout milliseconds of the session between zookeeper and id generator",
-      "sourceType": "com.doublechain.idgen.snowflake.ZookeeperConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure.ZookeeperConfigure",
       "defaultValue": 30000
     },
     {
       "name": "doublechain.idgen.snowflake.zookeeper.namespace",
       "type": "java.lang.String",
       "description": "The namespace of id center use in zookeeper, when you use multiple id centers with a single zookeeper cluster, you should specify different namespace for each id center",
-      "sourceType": "com.doublechain.idgen.snowflake.ZookeeperConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure.ZookeeperConfigure",
       "defaultValue": "snowflake"
     }
   ],
