@@ -3,7 +3,7 @@
 
 # 模块说明
 
-- snowflake 该模块内提供了snowflake的实现代码，和集群谐调的逻辑，目前支持ignite和zookeeper来管理集群。
+- snowflake 该模块内包含snowflake的实现代码，和集群管理的逻辑，目前支持ignite和zookeeper来管理集群。
 - snowflake-ignite-starter 该模块封装了由ignite管理集群的springboot starter
 - snowflake-zookeeper-starter 该模块封装了由zookeeper管理集群的springboot starter
 
@@ -107,7 +107,7 @@ doublechain:
       group: test #group用于隔离snowflake的全局性的范围，比如你可以指定在test这个项目内全局唯一
       start-timestamp: 2019-06-01T12:00:00 #由于snowflake的时间戳采用41位存储。所以最多能使用69年，请合理设置起始时间。设定后不应该再改动，默认值是2018-01-01T00:00:00
       zookeeper:
-        namespace: my-snowflake #注册到zookeeper上的根路径，单和其他中间件公用同一个zookeeper集群的时候可能会用到。
+        namespace: my-snowflake #注册到zookeeper上的根路径，和其他中间件公用同一个zookeeper集群的时候可能会用到。
         servers: 10.0.0.32:2181 #zookeeper集群地址，逗号分隔
         session-timeout-ms: 30000 #zookeeper会话超时时间
 ```
