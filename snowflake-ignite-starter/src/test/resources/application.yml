@@ -8,5 +8,6 @@ doublechain:
           group-ip: 228.1.2.4
           multicast-port: 47401
         discovery-type: multicast
+      start-timestamp: 2019-06-01T12:00:00
 server:
   port: 18080

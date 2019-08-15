@@ -26,6 +26,13 @@
       "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure"
     },
     {
+      "name": "doublechain.idgen.snowflake.start-timestamp",
+      "type": "java.lang.String",
+      "description": "The start timestamp which snowflake uses.",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure",
+      "defaultValue": "2018-01-01T00:00:00"
+    },
+    {
       "name": "doublechain.idgen.snowflake.zookeeper.servers",
       "type": "java.lang.String",
       "description": "Zookeeper cluster connection servers, comma separated",

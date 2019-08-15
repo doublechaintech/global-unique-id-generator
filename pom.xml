@@ -15,6 +15,7 @@
         <module>id-space-client</module>
         <module>snowflake</module>
         <module>snowflake-zookeeper-starter</module>
+        
         <module>snowflake-ignite-starter</module>
     </modules>
 

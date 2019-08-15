@@ -21,14 +21,21 @@
       "name": "doublechain.idgen.snowflake.data-center",
       "type": "java.lang.Integer",
       "description": "Specify the data center id which is the snowflake used to generate id",
-      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure",
       "defaultValue": 1
     },
     {
       "name": "doublechain.idgen.snowflake.group",
       "type": "java.lang.String",
       "description": "Group is used to separate with different id center group, sometimes it can be the project name",
-      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeZookeeperConfigure"
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure"
+    },
+    {
+      "name": "doublechain.idgen.snowflake.start-timestamp",
+      "type": "java.lang.String",
+      "description": "The start timestamp which snowflake uses.",
+      "sourceType": "com.doublechain.idgen.snowflake.SnowflakeIgniteConfigure",
+      "defaultValue": "2018-01-01T00:00:00"
     },
     {
       "name": "doublechain.idgen.snowflake.ignite.join-timeout",

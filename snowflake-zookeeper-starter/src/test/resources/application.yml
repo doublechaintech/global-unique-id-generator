@@ -7,3 +7,4 @@ doublechain:
         namespace: my-snowflake
         servers: 10.0.0.32:2181
         session-timeout-ms: 30000
+      start-timestamp: 2019-06-01T12:00:00
